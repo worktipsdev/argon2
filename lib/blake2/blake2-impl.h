@@ -19,7 +19,11 @@
 #endif
 /* Argon2 Team - End Code */
 
-static inline uint32_t load32(const void *src) {
+#ifndef __always_inline
+#define __always_inline inline
+#endif
+ 
+static __always_inline uint32_t load32(const void *src) {
 #if defined(NATIVE_LITTLE_ENDIAN)
     return *(const uint32_t *)src;
 #else
@@ -32,7 +36,7 @@ static inline uint32_t load32(const void *src) {
 #endif
 }
 
-static inline uint64_t load64(const void *src) {
+static __always_inline uint64_t load64(const void *src) {
 #if defined(NATIVE_LITTLE_ENDIAN)
     return *(const uint64_t *)src;
 #else
@@ -49,7 +53,7 @@ static inline uint64_t load64(const void *src) {
 #endif
 }
 
-static inline void store32(void *dst, uint32_t w) {
+static __always_inline void store32(void *dst, uint32_t w) {
 #if defined(NATIVE_LITTLE_ENDIAN)
     *(uint32_t *)dst = w;
 #else
@@ -64,7 +68,7 @@ static inline void store32(void *dst, uint32_t w) {
 #endif
 }
 
-static inline void store64(void *dst, uint64_t w) {
+static __always_inline void store64(void *dst, uint64_t w) {
 #if defined(NATIVE_LITTLE_ENDIAN)
     *(uint64_t *)dst = w;
 #else
@@ -88,3 +92,4 @@ static inline void store64(void *dst, uint64_t w) {
 }
 
 #endif // ARGON2_BLAKE2_IMPL_H
+
